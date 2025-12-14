@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/0945799112thoai-rgb/My-repository/issues"
   },
-  "homepage": "https://github.com/0945799112thoai-rgb/My-repository#readme"
+  "homepage": "https://github.com/0945799112thoai-rgb/My-repository#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
