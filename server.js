@@ -1,5 +1,6 @@
 // 1. Khai báo Express
 const express = require('express');
+const path = require('path');
 const app = express();
 
 // 2. Thiết lập Cổng (PORT)
@@ -10,6 +11,10 @@ const PORT = process.env.PORT || 3000;
 // Khi người dùng truy cập đường dẫn gốc '/', server sẽ trả về câu chào.
 app.get('/', (req, res) => {
   res.send('Chào mừng đến với Server Node.js/Express đã sẵn sàng cho Render!');
+});
+
+app.get('home/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'home', 'Templates', 'home.html'));
 });
 
 // 4. Khởi động Server (Server bắt đầu lắng nghe yêu cầu)
