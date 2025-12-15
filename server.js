@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
   res.send('Chào mừng đến với Server Node.js/Express đã sẵn sàng cho Render!');
 });
 
-app.get('home/', (req, res) => {
+app.get('/home', (req, res) => {
   res.sendFile(path.join(__dirname, 'home', 'Templates', 'home.html'));
 });
 
