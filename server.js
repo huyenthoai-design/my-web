@@ -10,15 +10,11 @@ const PORT = process.env.PORT || 3000;
 // 3. Định nghĩa một API đơn giản (route)
 // Khi người dùng truy cập đường dẫn gốc '/', server sẽ trả về câu chào.
 app.get('/', (req, res) => {
-  res.send('Chào mừng đến với Server Node.js/Express đã sẵn sàng cho Render!');
+  res.send('Welcome');
 });
 
-app.get('/home', (req, res) => {
-  res.sendFile(path.join(__dirname, 'home', 'Templates', 'home.html'));
-});
-
-app.get('/app', (req, res) => {
-  res.sendFile(path.join(__dirname, 'home', 'Templates', 'app.html'));
+app.get('/base', (req, res) => {
+  res.sendFile(path.join(__dirname, 'home', 'Templates', 'base.html'));
 });
 
 // 4. Khởi động Server (Server bắt đầu lắng nghe yêu cầu)
