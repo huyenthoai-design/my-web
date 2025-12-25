@@ -20,7 +20,7 @@ from home import views as home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/',include('home.get_home'))
+    path('', include('home.urls'))
 ]
 
 from django.urls import path
