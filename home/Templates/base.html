@@ -5,7 +5,6 @@
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
     <head>
-        {% load static%}
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Săn đuổi ước mơ</title>
@@ -25,7 +24,8 @@
         <script src="{%static 'js/myscript.js' %}" > </script>
         <script src="{%static 'js/owl.carousel.js' %}" > </script>
         <!-- ICON / FAVICON -->
-        <link rel="icon" type="image/x-icon" href="{% static/images 'logo.ico' %}">
+         {% load static %}
+        <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
     </head>
 
     <body>
