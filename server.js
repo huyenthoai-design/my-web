@@ -1,10 +1,16 @@
 // 1.
 const express = require('express');
+const nunjucks = require('nunjucks');
 const axios = require('axios');
 const path = require('path');
 const app = express();
 // cho phép server đọc dữ liệu dạng JSON
 app.use(express.json());
+// cấu hình Nunjucks để đọc thư mục Templates
+nunjucks.configure(path.join(__dirname, 'home', 'Templates'), {
+  autoescape: true,
+  express: app
+});
 // phục vụ thư mục staticfiles
 app.use('/static', express.static(path.join(__dirname, 'staticfiles')));
 
@@ -17,15 +23,11 @@ const PORT = process.env.PORT || 3000;
 // 3. Định nghĩa một API đơn giản (route)
 // ví dụ: trả về một trang HTML
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'home', 'Templates', 'base.html'));
-});
-
-app.get('/base', (req, res) => {
-  res.sendFile(path.join(__dirname, 'home', 'Templates', 'base.html'));
+  res.render('base.html');   // Nunjucks sẽ render file base.html
 });
 
 app.get('/child1', (req, res) => {
-  res.sendFile(path.join(__dirname, 'home', 'Templates', 'child1.html'));
+  res.render('child1.html'); // Nunjucks sẽ xử lý {% extends "base.html" %}
 });
 
 
