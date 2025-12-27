@@ -106,6 +106,18 @@ DATABASES = {
     }
 }
 
+import os
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('DanEmAnhTien'),
+        'USER': os.getenv('root'),
+        'PASSWORD': os.getenv(''),
+        'HOST': os.getenv('localhost'),
+        'PORT': os.getenv('DB_PORT', '3000'),
+    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -142,6 +154,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
