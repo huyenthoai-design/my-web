@@ -210,3 +210,36 @@ main {
   background-color: #dc3545; /* màu đỏ Bootstrap bg-danger */
   min-height: 150px; /* hoặc chiều cao bạn muốn */
 }
+/* Nếu chỉ muốn áp dụng trên mobile */
+@media (max-width: 992px) {
+  .navbar-toggler {
+    margin-right: 8px;
+  }
+  .navbar-brand {
+    margin-left: 8px;
+  }
+}
+/* Giữ nguyên desktop, chỉ chỉnh mobile */
+@media (max-width: 768px) {
+  .slider img {
+    display: block;
+    margin: 0 auto;          /* căn giữa */
+    max-width: 100%;         /* không vượt quá màn hình */
+    height: auto;            /* giữ tỉ lệ ảnh */
+    object-fit: cover;       /* cắt đều hai bên */
+    object-position: center; /* luôn lấy phần giữa ảnh */
+  }
+}
+.slider {
+  background-color: #4CAF50; /* xanh lá tươi */
+}
+.carousel-inner {
+  background-color: #4CAF50;
+}
+.carousel-item {
+  background-color: #4CAF50;
+  padding: 5px 0; /* thêm khoảng trống trên/dưới để nền lộ ra */
+}
+.navbar {
+    background-color: #edf25b;
+}
