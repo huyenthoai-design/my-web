@@ -36,7 +36,7 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <image/x src="/static/images/logo.ico" width="90" height="90" />
+                    <image/x src="/static/images/logo.ico" width="60" height="60" />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -44,13 +44,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link fs-5 active" aria-current="page" href="#">Trang chủ</a>
+                            <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fs-5" href="#">Giới thiệu</a>
+                            <a class="nav-link" href="#">Giới thiệu</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link fs-5 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Hoạt động
                             </a>
                             <ul class="dropdown-menu">
@@ -61,7 +61,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fs-5" href="#">Liên hệ</a>
+                            <a class="nav-link" href="#">Liên hệ</a>
                         </li>
                     </ul>
                     <form class="d-flex" role="search">
@@ -90,24 +90,15 @@
             </div>
         </nav>
 
-        <!-- <header>
-            <p>Hello<p/>
-        <header/> -->
+        <main class="container">
+            <p></p>
+        </main>
 
         {% block slider %}{% endblock slider %}
-
-        <main>
-            <section>
-                <h2>"Trăng Sáng Soi Biên Sử - Địa Vững Dáng Giang Sơn" nơi quy tụ những tâm hồn yêu Sử – say Địa.</h2>
-                <p>❤️‍🔥Từ giấc mơ chuyên Sử – Địa tới hiện thực rực rỡ, tụi mình đã cho ra đời trang page này như nét đặc sắc tự hào của tập thể Sử Địa đó.</p>
-                <p>🌕"Trăng Sáng Soi Biên Sử", lấy vầng trăng làm biểu tượng vì trăng không tự phát sáng mà mượn ánh mặt trời rực rỡ, tựa tinh thần đoàn kết, sự khiêm nhường – Đó chính là mối dây liên kết không thể thiếu để kiến tạo ánh trăng vĩnh cửu soi đường cho lịch sử dân tộc, gặt hái vinh quang, làm nên tình bạn son sắt.</p>
-                <p>🌏"Địa Vững Dáng Giang Sơn" Chính là hình hài của một quốc gia độc lập, tự cường. "Địa" có vững vàng thì "giang sơn" mới có thể trường tồn. Kiến thức vững vàng chính là nền móng để mỗi cá nhân vươn xa và kiến tạo nên tương lai phồn vinh, tự hào. "Bởi học Địa không chỉ để biết nơi mình đứng, mà để hiểu nơi mình thuộc về – và tương lai mình bước tới."</p>
-                <p>⋆౨ৎ˚⟡˖ ࣪Mang trên mình một cái tên đầy thi vị và hào khí – “Trăng Sáng Soi Biên Sử – Địa Vững Dáng Giang Sơn” fanpage sẽ trở thành nhật ký tuổi trẻ ~ Nơi ánh trăng tri thức soi sáng từng bước chân chúng ta trưởng thành˚⋆𐙚｡ 𖦹.ᡣ𐭩˚</p>
-            </section>
-        </main>
+        {% block main %}{% endblock main%}
         
         <!-- Footer -->
-        <footer class="container-fluid bg-danger text-light text-center fixed-bottom p-1 mt-2" >
+        <footer class="container-fluid bg-danger text-light text-center p-1 mt-2">
             <strong>copyright 2025</strong>
         </footer>
 

@@ -194,3 +194,19 @@ form, fieldset{
 .nav ul li{
 	padding: 0 20px;
 }
+html, body {
+  height: 100%;
+  margin: 0;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main {
+  flex: 1; /* chiếm hết khoảng trống còn lại */
+}
+.footer-wrapper {
+  background-color: #dc3545; /* màu đỏ Bootstrap bg-danger */
+  min-height: 150px; /* hoặc chiều cao bạn muốn */
+}
