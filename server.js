@@ -30,6 +30,9 @@ app.get('/child1', (req, res) => {
   res.render('child1.html'); // Nunjucks sẽ xử lý {% extends "base.html" %}
 });
 
+app.get('/child2', (req, res) => {
+  res.render('child2.html');
+});
 
 // 4. Khởi động Server (Server bắt đầu lắng nghe yêu cầu)
 app.listen(PORT, () => {
