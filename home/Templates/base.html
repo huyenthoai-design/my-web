@@ -91,11 +91,10 @@
         </nav>
 
         <main class="container">
-            <p></p>
+            {% block slider %}{% endblock slider %}
+            {% block main %}{% endblock main%}
         </main>
 
-        {% block slider %}{% endblock slider %}
-        {% block main %}{% endblock main%}
         
         <!-- Footer -->
         <footer class="container-fluid bg-danger text-light text-center p-1 mt-2">
