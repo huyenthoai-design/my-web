@@ -210,3 +210,12 @@ main {
   background-color: #dc3545; /* màu đỏ Bootstrap bg-danger */
   min-height: 150px; /* hoặc chiều cao bạn muốn */
 }
+/* Nếu chỉ muốn áp dụng trên mobile */
+@media (max-width: 992px) {
+  .navbar-toggler {
+    margin-right: 8px;
+  }
+  .navbar-brand {
+    margin-left: 8px;
+  }
+}
