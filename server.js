@@ -34,6 +34,14 @@ app.get('/child2', (req, res) => {
   res.render('child2.html');
 });
 
+app.get('/child3', (req, res) => {
+  res.render('child3.html');
+});
+
+app.get('/minigames', (req, res) => {
+  res.render('minigames.html');
+});
+
 // 4. Khởi động Server (Server bắt đầu lắng nghe yêu cầu)
 app.listen(PORT, () => {
   console.log(`✅ Server đang chạy thành công tại http://localhost:${PORT}`);

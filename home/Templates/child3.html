@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+<!-- Xóa đi nội dung trong block của file gốc -->
+{% block base %}{% endblock base %}
+
+<!-- Nội dung block mà file con hiển thị -->
+{% block more %}
+<h1 class="container-fluid text-left">Thông tin liên hệ</h>
+{% endblock more %}

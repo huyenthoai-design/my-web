@@ -14,3 +14,9 @@ def child1(request):
 
 def child2(request):
     return render(request, 'child2.html')
+
+def child3(request):
+    return render(request, 'child3.html')
+
+def minigames(request):
+    return render(request, 'minigames.html')
