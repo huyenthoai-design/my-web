@@ -36,13 +36,13 @@
         <nav class="navbar navbar-expand-lg header-menu-dính">
             <div class="container-fluid">
                 <!-- Toggle button mở Offcanvas -->
-                <button class="navbar-toggler  order-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler order-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <!-- Logo -->
                 <a class="navbar-brand order-2" href="/">
-                    <image src="/static/images/logox.png" width="60" height="60" alt="Logo"/>
+                    <img src="/static/images/logox.png" width="50" height="50" alt="Logo"/>
                 </a>
 
                 <!-- Offcanvas menu cho toggle-->
@@ -54,30 +54,30 @@
                     <div class="offcanvas-body">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link fs-5" aria-current="page" href="/child1">Trang chủ</a>
+                                <a class="nav-link fs-5 maucuachumenu" aria-current="page" href="/trangchu">Trang chủ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link fs-5" href="/child2">Giới thiệu</a>
+                                <a class="nav-link fs-5 maucuachumenu" href="/gioithieu">Giới thiệu</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link fs-5 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link fs-5 dropdown-toggle maucuachumenu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Hoạt động
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item fs-7" href="#">Phong trào</a></li>
-                                    <li><a class="dropdown-item fs-7" href="#">Môn học</a></li>
+                                    <li><a class="dropdown-item fs-7" href="/monhoc">Môn học</a></li>
                                     <li><a class="dropdown-item fs-7" href="/minigames">Mini Games</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item fs-7" href="#">Chuyện chưa kể</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link fs-5" href="/child3">Liên hệ</a>
+                                <a class="nav-link fs-5 maucuachumenu" href="/lienhe">Liên hệ</a>
                             </li>
                         </ul>
                         <form class="d-flex" role="search">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                            <button class="btn btn-outline-success" type="submit">Search</button>
+                            <button class="btn btn-outline-success text-white maucuachumenu" type="submit">Search</button>
                         </form>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                 <ul class="navbar-nav ms-auto order-4 mb-2 mb-lg-0">
                     <!-- Dropdown chỉ hiện trên desktop -->
                     <li class="nav-item dropdown d-none d-lg-block">
-                        <a class="nav-link fs-5 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link fs-5 dropdown-toggle text-white maucuachumenu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         User
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
@@ -101,7 +101,7 @@
 
                     <!-- Offcanvas chỉ hiện trên mobile -->
                     <li class="nav-item d-lg-none">
-                        <button class="btn nav-link fs-5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUser" aria-controls="offcanvasUser">
+                        <button class="btn nav-link fs-5 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUser" aria-controls="offcanvasUser">
                         User
                         </button>
                         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasUser">
@@ -187,6 +187,8 @@
             {% block info %}{% endblock info %}
             {% block more %}{% endblock more %}
             {% block minigames %}{% endblock minigames%}
+            {% block monhoc %}{% endblock monhoc %}
+            {% block sinhhoc %}{% endblock sinhhoc %}
         </main>
 
         <!-- Footer      <footer class="container-fluid bg-danger text-light text-center p-1 mt-3">

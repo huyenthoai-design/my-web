@@ -43,14 +43,14 @@
     display: block;
     }
     body {
-    padding-top: 95px; /* Thêm dòng này, chỉnh số px cho vừa với menu của bạn */
+    padding-top: 80px; /* Thêm dòng này, chỉnh số px cho vừa với menu của bạn */
     line-height: 1;
     background: rgb(244, 241, 234);
     background-repeat: no-repeat;
     background-attachment: fixed;
 	  font: 400 100%/1.625 "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 	  font-size: 13px;
-	  color: rgb(47, 54, 64);
+	  color: rgb(45, 52, 60);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -74,7 +74,7 @@
 .playfair-display {
   font-family: "Playfair Display", serif;
   font-optical-sizing: auto;
-  font-weight: 600;
+  font-weight: 700;
   font-style: normal;
 }
 .roboto {
@@ -119,7 +119,7 @@ p {
 h1 {
 	font-weight:400;
   color: rgb(192, 57, 43);
-  border-bottom:3px solid rgb(212, 175, 55);
+  border-bottom:3px solid rgb(213, 163, 0);
 	position:relative;
 	padding:14px 25px 5px 0;	
 	font-size: 2.5em;
@@ -129,16 +129,19 @@ h1 {
 	text-decoration: none;
 }
 h2 {
-	font-size:16px;
+	font-size:25px;
 	color:#111;
 	padding:5px 20px !important;
 	clear:both;
 	background:#eee;
 	font-weight:700;
 }
-h3{
+h3 {
+  font-size:19px;
+  font-weight: bold;
+  text-indent: 30px;
 	margin:0 0 10px 0;
-	color:#111;
+	color: rgb(26, 88, 159);
 }
 blockquote{
 	background:#eee;
@@ -258,7 +261,7 @@ main {
   background-color: rgb(152, 245, 225, 0.0); /* xanh lá tươi */
 }
 .carousel-inner {
-  background-color: rgb(152, 245, 225, 0.0);
+  background-color: rgba(152, 245, 225, 0.0); /* số 0 cuối là độ mờ tức là ảnh sẽ không hiện màu */
 }
 .carousel-item {
   background-color: none;
@@ -274,23 +277,15 @@ main {
     overflow: hidden;    /* Đảm bảo màu xanh không tràn ra ngoài góc bo */
   }
 }
-.navbar {
-  background-color: #FBF8CC;
-}
 .container-fluid.info-block.blocklink {
   background-color: rgb(163, 196, 243);
   padding: 5px 0; /* thêm khoảng trống trên/dưới để nền lộ ra */
 }
 .main-container {
-  padding-left: 300px;
-  padding-right: 300px;
-}
+  max-width: 450px; /* không vượt quá 1200px */
+  width: 100%;       /* nhưng vẫn co giãn theo màn hình */
+  margin: 0 auto;    /* căn giữa */
 
-@media (max-width: 768px) {
-  .main-container {
-    padding-left: 10px;   /* padding nhỏ hơn cho mobile */
-    padding-right: 10px;
-  }
 }
 .my-cus-foot {
   background: linear-gradient(45deg, rgb(255, 207, 210), rgb(253, 228, 207));
@@ -302,8 +297,10 @@ main {
   left: 0;
   width: 100%;        /* Trải dài hết chiều ngang */
   z-index: 1000;      /* Đảm bảo menu luôn nằm trên các thành phần khác */
-  background-color: rgb(213, 163, 0); /* Giữ màu vàng nhạt như trong ảnh của bạn */
+  background-color: rgb(207, 181, 60); /* Giữ màu vàng nhạt như trong ảnh của bạn */
   box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Thêm chút đổ bóng cho đẹp khi cuộn */
+  padding-top: 5px;   /* giảm khoảng cách trên */
+  padding-bottom: 5px; /* giảm khoảng cách dưới */
 }
 .content-box { /* Đặt class này cho các thẻ div bao quanh nội dung trắng cái chỗ trang chủ có tiêu đề bao trắng */
     max-width: 500px;      /* Giới hạn độ rộng lại */
@@ -350,4 +347,45 @@ main {
     text-decoration: none;
     cursor: pointer;
     border-bottom: 1px none #BB1EEA; /* Gợi ý cho người dùng biết đây là chỗ có thể tương tác */
+}
+.navbar-toggler {
+  background-color: white;   /* nền trắng */
+  border: none;              /* bỏ viền nếu không cần */
+  padding: 4px 8px;          /* chỉnh khoảng cách cho đẹp */
+  border-radius: 4px;        /* bo góc nhẹ */
+}
+.maucuachumenu {
+  color: white !important;
+}
+@media (max-width: 991.8px) {
+  .maucuachumenu {
+    color: black !important;
+  }
+}
+@media (min-width: 992px) {
+  /*3 cái cho chằn ảnh vào thanh menu */
+  .navbar {
+    background-image: url("/static/images/trongdongcut.png"); /* đường dẫn ảnh */
+    background-repeat: no-repeat;   /* không lặp lại */
+    background-position: center;    /* đặt ở giữa */
+    background-size: cover;         /* phủ kín toàn bộ thanh menu */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* để nằm trên các phần tử khác */
+  }
+  /* lớp phủ mờ */
+  .navbar::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(255, 255, 255, 0.0); /* lớp trắng mờ, chỉnh độ mờ bằng số 0.0 tức ko có độ mờ */
+    z-index: 1;
+  }
+  /* đảm bảo nội dung menu nằm trên lớp phủ */
+  .navbar * {
+    position: relative;
+    z-index: 2;
+  }
 }

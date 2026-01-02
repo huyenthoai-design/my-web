@@ -3,9 +3,11 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.trangchu),
-    path('child1/', views.child1),
-    path('child2/', views.child2),
-    path('child3/', views.child3),
+    path('', views.base),
+    path('trangchu/', views.trangchu),
+    path('gioithieu/', views.gioithieu),
+    path('lienhe/', views.lienhe),
     path('minigames/', views.minigames),
+    path('monhoc/', views.monhoc),
+    path('sinhhoc/', views.sinhhoc),
 ]

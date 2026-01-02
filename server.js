@@ -26,20 +26,28 @@ app.get('/', (req, res) => {
   res.render('base.html');   // Nunjucks sẽ render file base.html
 });
 
-app.get('/child1', (req, res) => {
-  res.render('child1.html'); // Nunjucks sẽ xử lý {% extends "base.html" %}
+app.get('/trangchu', (req, res) => {
+  res.render('trangchu.html'); // Nunjucks sẽ xử lý {% extends "base.html" %}
 });
 
-app.get('/child2', (req, res) => {
-  res.render('child2.html');
+app.get('/gioithieu', (req, res) => {
+  res.render('gioithieu.html');
 });
 
-app.get('/child3', (req, res) => {
-  res.render('child3.html');
+app.get('/lienhe', (req, res) => {
+  res.render('lienhe.html');
 });
 
 app.get('/minigames', (req, res) => {
   res.render('minigames.html');
+});
+
+app.get('/monhoc', (req, res) => {
+  res.render('monhoc.html');
+});
+
+app.get('/sinhhoc', (req, res) => {
+  res.render('sinhhoc.html');
 });
 
 // 4. Khởi động Server (Server bắt đầu lắng nghe yêu cầu)

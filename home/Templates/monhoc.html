@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+<!-- Xóa đi nội dung trong block của file gốc -->
+{% block base %}{% endblock base %}
+
+<!-- Nội dung block mà file con hiển thị -->
+{% block monhoc %}
+    <h1 class="container-fluid text-left playfair-display">Danh sách môn học<h1>
+        <a href="/sinhhoc" a:hover a:active a:link><p>Sinh học</p></a>
+{% endblock monhoc %}
