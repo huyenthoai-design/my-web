@@ -26,6 +26,10 @@ app.get('/', (req, res) => {
   res.render('base.html');   // Nunjucks sẽ render file base.html
 });
 
+app.get('/ping', (req, res) => {
+  res.status(200).send('Server is alive'); // Route/ping cho web chạy liên tục với cron-job
+});
+
 app.get('/trangchu', (req, res) => {
   res.render('trangchu.html'); // Nunjucks sẽ xử lý {% extends "base.html" %}
 });
