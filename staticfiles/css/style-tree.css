@@ -1,0 +1,96 @@
+/* ===== TREE VIEW ===== */
+
+/* Cấp 1: Môn học */
+.tree > li > .toggle {
+    font-family: "Roboto"; /* font chữ */
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase; /* viết hoa toàn bộ */
+}
+
+/* Cấp 2: Bài học */
+.tree ul > li > .toggle {
+    font-family: "Roboto"; /* font chữ */
+    font-size: 22px;
+    font-weight: 600;
+    text-transform: none; /* giữ nguyên chữ thường */
+}
+
+/* Cấp 3: Mục nhỏ */
+.tree ul ul > li > .toggle {
+    font-family: "Roboto"; /* font chữ */
+    font-size: 20px;
+    font-weight: normal; /* không in đậm */
+    text-transform: none;
+}
+
+/* Cấp 4: sâu hơn nữa */
+.tree ul ul ul > li > .toggle {
+    font-family: "Roboto"; /* font chữ */
+    font-size: 19px;
+    font-weight: normal;
+    text-transform: none;
+}
+
+/* Link cuối cùng (đích chi tiết) */
+.tree a {
+    font-family: "Roboto"; /* font chữ */
+    font-size: 18px; /* cỡ chữ */
+    font-weight: normal;
+    text-transform: none;
+    text-decoration: none;
+    color: #2980b9;
+    display: inline-block;
+    margin: 2px 0;
+}
+
+.tree, .tree ul {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 20px;
+}
+
+.tree .toggle:hover {
+    color: #e67e22; /* đổi màu khi hover */
+}
+
+/* Mũi tên mặc định (đóng) */
+.tree .toggle::before {
+    content: "▶";
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 14px;
+    transition: transform 0.2s;
+    color: #34495e;
+}
+
+/* Khi mở thì xoay mũi tên */
+.tree .toggle.open::before {
+    transform: rotate(90deg);
+    color: #27ae60;
+}
+
+/* Danh sách con ẩn mặc định */
+.tree ul {
+    display: none;
+    margin-left: 20px;
+    border-left: 1px dashed #ccc; /* đường gạch để dễ nhìn phân cấp */
+    padding-left: 10px;
+}
+
+/* Khi mở thì hiện */
+.tree ul.show {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Hiệu ứng mở */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.tree a:hover {
+    text-decoration: underline;
+    color: #2bc050;
+}
