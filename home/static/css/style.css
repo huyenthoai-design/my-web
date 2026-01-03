@@ -87,7 +87,8 @@
 p {
   font-family: "Roboto";
   font-size: 18px; /* đặt cỡ chữ là 18px */
-
+  color: rgb(45, 52, 60);
+  text-transform: none;
 }
 .clearfix:after {
 	visibility: hidden;
@@ -117,7 +118,10 @@ p {
 .fl{float: left;}
 .fr{float: right;}
 h1 {
-	font-weight:400;
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
   color: rgb(192, 57, 43);
   border-bottom:3px solid rgb(213, 163, 0);
 	position:relative;
@@ -308,7 +312,21 @@ main {
     padding: 20px;          /* Tạo khoảng trống bên trong cho chữ dễ thở */
     border-radius: 8px;     /* Bo góc nhẹ cho hiện đại */
 }
+.footer {
+  display: flex;              /* chia footer thành 2 cột ngang */
+  justify-content: space-between; /* đẩy trái và phải cách nhau */
+  background-color: rgb(44, 62, 80);  /* nền xanh dương */
+  color: white;                /* chữ trắng */
+  padding: 20px;
+}
+.footer-left {
+  width: 48%;                 /* mỗi bên chiếm khoảng nửa */
+}
+.footer-right {
+  width: 48%;                 /* mỗi bên chiếm khoảng nửa */
+}
 .footer-bg {
+  display: flex;
   background-color: rgb(44, 62, 80); /* Màu xanh đen chuyên nghiệp */
   min-height: auto;
   margin: 0;
@@ -316,8 +334,6 @@ main {
   border: 0;
   font-size: 100%;
   font: inherit;
-  display: block;
-  flex-direction: column;
   justify-content: center;
   border-radius: 15px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
