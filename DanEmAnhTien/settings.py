@@ -99,14 +99,7 @@ WSGI_APPLICATION = 'DanEmAnhTien.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'sudiala1-db',
-        'ENFORCE_SCHEMA': False,
-        'CLIENT': {
-            'host': 'mongodb+srv://huyenthoai-mydb:0945799112@sudiala1-db.au8xedc.mongodb.net/?appName=sudiala1-db',
-        }
-    }
+   
 }
 
 
