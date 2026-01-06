@@ -45,12 +45,12 @@ footer, header, hgroup, menu, nav, section {
 body {
   padding-top: 80px; /* Thêm dòng này, chỉnh số px cho vừa với menu của bạn */
   line-height: 1;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(244, 241, 234);
   background-repeat: no-repeat;
   background-attachment: fixed;
   font: 400 100%/1.625 "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 13px;
-  color: rgb(0, 0, 0);
+  color: rgb(45, 52, 60);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -89,7 +89,7 @@ table {
 p {
   font-family: "Roboto";
   font-size: 18px; /* đặt cỡ chữ là 18px */
-  color: rgb(0, 0, 0);
+  color: rgb(45, 52, 60);
   text-transform: none;
 }
 .clearfix:after {
@@ -136,10 +136,9 @@ h1 {
 }
 h2 {
 	font-size:25px;
-	color:#231768;
+	color:#000000;
 	padding:5px 20px !important;
 	clear:both;
-	background:#ffffff;
 	font-weight:700;
 }
 h3 {
@@ -303,7 +302,7 @@ main {
   left: 0;
   width: 100%;        /* Trải dài hết chiều ngang */
   z-index: 1000;      /* Đảm bảo menu luôn nằm trên các thành phần khác */
-  background-color: rgb(207, 181, 60); /* Giữ màu vàng nhạt như trong ảnh của bạn */
+  background-color: rgb(230, 199, 19); /* Giữ màu vàng nhạt như trong ảnh của bạn */
   box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Thêm chút đổ bóng cho đẹp khi cuộn */
   padding-top: 5px;   /* giảm khoảng cách trên */
   padding-bottom: 5px; /* giảm khoảng cách dưới */
@@ -396,7 +395,7 @@ main {
   }
 }
 @media (min-width: 992px) {
-  /*3 cái cho chằn ảnh vào thanh menu */
+  /*3 cái cho chèn ảnh vào thanh menu */
   .navbar {
     background-image: url("/static/images/trongdongcut.png"); /* đường dẫn ảnh */
     background-repeat: no-repeat;   /* không lặp lại */
