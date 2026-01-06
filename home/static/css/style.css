@@ -45,12 +45,12 @@
     body {
     padding-top: 80px; /* Thêm dòng này, chỉnh số px cho vừa với menu của bạn */
     line-height: 1;
-    background: rgb(244, 241, 234);
+    background-color: rgb(255, 255, 255);
     background-repeat: no-repeat;
     background-attachment: fixed;
 	  font: 400 100%/1.625 "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 	  font-size: 13px;
-	  color: rgb(45, 52, 60);
+	  color: rgb(0, 0, 0);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -87,7 +87,7 @@
 p {
   font-family: "Roboto";
   font-size: 18px; /* đặt cỡ chữ là 18px */
-  color: rgb(45, 52, 60);
+  color: rgb(0, 0, 0);
   text-transform: none;
 }
 .clearfix:after {
@@ -122,8 +122,8 @@ h1 {
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
-  color: rgb(192, 57, 43);
-  border-bottom:3px solid rgb(213, 163, 0);
+  color: rgb(194, 57, 42);
+  border-bottom:3px solid rgb(230, 199, 19);
 	position:relative;
 	padding:14px 25px 5px 0;	
 	font-size: 2.5em;
@@ -134,10 +134,10 @@ h1 {
 }
 h2 {
 	font-size:25px;
-	color:#111;
+	color:#231768;
 	padding:5px 20px !important;
 	clear:both;
-	background:#eee;
+	background:#ffffff;
 	font-weight:700;
 }
 h3 {
