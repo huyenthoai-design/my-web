@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'rest_framework',
     'corsheaders',
+    'home',
     
 ]
 
