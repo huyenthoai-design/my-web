@@ -6,7 +6,7 @@ import bcrypt
 from .models import UserAccount
 from django.contrib import messages
 
-# 1. Trang chủ
+# 1. Trang chủ/gốc
 def base(request):
     return render(request, 'base.html')
 
@@ -61,8 +61,8 @@ def lienhe(request):
 def ping(request):
     return render(request, 'ping.html')
 
-def minigames(request):
-    return render(request, 'minigames.html')
+def phongtrao(request):
+    return render(request, 'phongtrao.html')
 
 def monhoc(request):
     return render(request, 'monhoc.html')
@@ -73,3 +73,8 @@ def sinhhoc(request):
 def lichsu(request):
     return render(request, 'lichsu.html')
 
+def minigames(request):
+    return render(request, 'minigames.html')
+
+def chuyenchuake(request):
+    return render(request, 'chuyenchuake.html')

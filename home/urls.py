@@ -4,18 +4,22 @@ from . import views
 
 urlpatterns = [
     path('', views.base, name='base'),
-    path('login', views.logout_view, name='login'),
 
-    path('trangchu/', views.trangchu),
-    path('gioithieu/', views.gioithieu),
-    path('lienhe/', views.lienhe),
+    path('trangchu/', views.trangchu, name='trangchu'),
+    path('gioithieu/', views.gioithieu, name='gioithieu'),
+    path('lienhe/', views.lienhe, name='lienhe'),
 
-    path('ping/', views.ping),
+    path('ping/', views.ping, name='ping'),
 
-    path('minigames/', views.minigames),
-    path('monhoc/', views.monhoc),
-        path('sinhhoc/', views.sinhhoc),
-        path('lichsu/', views.lichsu),
+    path('phongtrao/', views.phongtrao, name='phongtrao'),
+
+    path('monhoc/', views.monhoc, name='monhoc'),
+        path('sinhhoc/', views.sinhhoc, name='sinhhoc'),
+        path('lichsu/', views.lichsu, name='lichsu'),
+
+    path('minigames/', views.minigames, name='minigames'),
+
+    path('chuyenchuake/', views.chuyenchuake, name='chuyenchuake'),
 
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),

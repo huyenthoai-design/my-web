@@ -33,10 +33,15 @@ urlpatterns = [
 
     path('ping/', include('home.urls')),
     
-    path('minigames/', include('home.urls')),
+    path('phongtrao/', include('home.urls')),
+    
     path('monhoc/', include('home.urls')),
-    path('sinhhoc/', include('home.urls')),
-    path('lichsu/', include('home.urls')),
+        path('sinhhoc/', include('home.urls')),
+        path('lichsu/', include('home.urls')),
+
+    path('minigames/', include('home.urls')),
+
+    path('chuyenchuake/', include('home.urls')),
 
     path('profile/', include('home.urls')),
     

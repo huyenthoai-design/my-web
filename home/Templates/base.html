@@ -70,11 +70,11 @@
                                     Hoạt động
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item fs-7" href="#">Phong trào</a></li>
+                                    <li><a class="dropdown-item fs-7" href="/phongtrao">Phong trào</a></li>
                                     <li><a class="dropdown-item fs-7" href="/monhoc">Môn học</a></li>
                                     <li><a class="dropdown-item fs-7" href="/minigames">Mini Games</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item fs-7" href="#">Chuyện chưa kể</a></li>
+                                    <li><a class="dropdown-item fs-7" href="/chuyenchuake">Chuyện chưa kể</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">
@@ -88,20 +88,40 @@
                 <ul class="navbar-nav ms-auto order-4 mb-2 mb-lg-0">
                     
                     <!-- Dropdown chỉ hiện trên desktop -->
-                    <li class="nav-item dropdown d-none d-lg-block">
+                     {% load static %}
+                    <link rel="stylesheet" href="/static/css/acc.css" />
+                    <li class="nav-item dropdown d-none d-lg-block" style="position: relative;">
                         <div class="header-right">
                             {% if request.session.user_id %}
                                 <div class="dropdown">
-                                    <button class="dropbtn nav-link fs-5 dropdown-toggle maucuachumenu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <a> Hello: {{ request.session.username }} </a> </button>
-                                    <div class="dropdown-menu">
-                                        <a href="/profile"><p style="text-align: right; padding-right: 10px;">Trang cá nhân</p></a>
-                                        <a href="#"><p style="text-align: right; padding-right: 10px;">Lịch sử</p></a>
-                                        <hr>
-                                        <a href="{% url 'logout' %}"><p class="text-danger" style="text-align: right; padding-right: 10px;">Đăng xuất</p></a>
+                                    <button class="dropbtn nav-link fs-5 dropdown-toggle maucuachumenu" 
+                                            type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                            style="border: none; background: transparent;"
+                                            href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="/static/images/taikhoan-0.png" width="50" height="50" alt="Logo"/>
+                                    </button>
+                                    <div class="dropdown-menu" style="right: 0 !important; left: auto !important; min-width: 180px; padding: 10px; border-radius: 10px; box-shadow: 0px 4px 15px rgba(0,0,0,0.2); position: absolute;">
+                                        <a class="dropdown-item" href="/profile" style="text-align: right; padding: 8px 10px; display: block; text-decoration: none; color: black;">
+                                            Trang cá nhân
+                                        </a>
+                                        
+                                        <a class="dropdown-item" href="#" style="text-align: right; padding: 8px 10px; display: block; text-decoration: none; color: black;">
+                                            Lịch sử
+                                        </a>
+                                        
+                                        <hr style="margin: 5px 0;">
+                                        
+                                        <a class="dropdown-item" href="{% url 'logout' %}" style="text-align: right; padding: 8px 10px; display: block; text-decoration: none;">
+                                            <span style="color: red; font-weight: bold;">Đăng xuất</span>
+                                        </a>
                                     </div>
                                 </div>
                             {% else %}
-                                <a href="{% url 'login' %}" class="btn-login"><p class="maucuachumenu" style="text-align: right; background-color: rgba(38, 29, 138, 1); border-radius: 10px; padding: 7px;">Đăng nhập</p></a>
+                                <a href="{% url 'login' %}" class="btn-login" style="text-decoration: none;">
+                                    <p class="maucuachumenu" style="text-align: right; background-color: rgba(38, 29, 138, 1); border-radius: 10px; padding: 7px; color: white; margin: 0;">
+                                        Đăng nhập
+                                    </p>
+                                </a>
                             {% endif %}
                         </div> 
                     </li>
@@ -110,7 +130,7 @@
                     <li class="nav-item d-lg-none">
                         {% if request.session.user_id %}
                             <button class="btn nav-link fs-5 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUser" aria-controls="offcanvasUser">
-                                <a> Hello: {{ request.session.username }} </a>
+                                <a><a style="color: rgba(26, 129, 59, 1)"><strong>Hi:</strong></a> {{ request.session.username }} </a>
                             </button>
                             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasUser">
                                 <div class="offcanvas-header">
@@ -197,11 +217,16 @@
             {% block info %}{% endblock info %}
             {% block more %}{% endblock more %}
 
-            {% block minigames %}{% endblock minigames%}
+            {% block phongtrao %}{% endblock phongtrao %}
+
             {% block monhoc %}{% endblock monhoc %}
                 {% block sinhhoc %}{% endblock sinhhoc %}
                 {% block lichsu %}{% endblock lichsu %}
             
+            {% block minigames %}{% endblock minigames%}
+            
+            {% block chuyenchuake %}{% endblock chuyenchuake %}
+
             {% block login %}{% endblock login %}
             {% block profile %}{% endblock profile %}
         </main>
