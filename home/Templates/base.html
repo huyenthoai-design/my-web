@@ -88,19 +88,16 @@
                 <ul class="navbar-nav ms-auto order-4 mb-2 mb-lg-0">
                     
                     <!-- Dropdown chỉ hiện trên desktop -->
-                     {% load static %}
-                    <link rel="stylesheet" href="/static/css/acc.css" />
                     <li class="nav-item dropdown d-none d-lg-block" style="position: relative;">
                         <div class="header-right">
                             {% if request.session.user_id %}
                                 <div class="dropdown">
                                     <button class="dropbtn nav-link fs-5 dropdown-toggle maucuachumenu" 
-                                            type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                                            style="border: none; background: transparent;"
+                                            type="button" style="border: none; background: transparent;"
                                             href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <img src="/static/images/taikhoan-0.png" width="50" height="50" alt="Logo"/>
                                     </button>
-                                    <div class="dropdown-menu" style="right: 0 !important; left: auto !important; min-width: 180px; padding: 10px; border-radius: 10px; box-shadow: 0px 4px 15px rgba(0,0,0,0.2); position: absolute;">
+                                    <div class="dropdown-menu" style="right: 0 !important; left: auto !important; min-width: 180px; padding: 10px; border-radius: 8px; box-shadow: 0px 4px 15px rgba(0,0,0,0.2); position: absolute;">
                                         <a class="dropdown-item" href="/profile" style="text-align: right; padding: 8px 10px; display: block; text-decoration: none; color: black;">
                                             Trang cá nhân
                                         </a>
@@ -130,11 +127,14 @@
                     <li class="nav-item d-lg-none">
                         {% if request.session.user_id %}
                             <button class="btn nav-link fs-5 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUser" aria-controls="offcanvasUser">
-                                <a><a style="color: rgba(26, 129, 59, 1)"><strong>Hi:</strong></a> {{ request.session.username }} </a>
+                                
+                                <img src="/static/images/taikhoan-0.png" width="50" height="50" alt="Logo"/>
                             </button>
                             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasUser">
                                 <div class="offcanvas-header">
-                                    <h1 class="offcanvas-title">Tài khoản</h1>
+                                    <h1 class="offcanvas-title">Tài khoản
+                                    <br>
+                                    <p><!--<a style="color: rgba(26, 129, 59, 1)"><strong>Hi:</strong></a>--> {{ request.session.username }} </p></h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                 </div>
                                 <div class="offcanvas-body">
@@ -142,7 +142,7 @@
                                         <li><a class="nav-link fs-6" href="/profile"><p>Trang cá nhân</p></a></li>
                                         <li><a class="nav-link fs-6" href="#"><p>Lịch sử</p></a></li>
                                         <hr>
-                                        <li><a class="nav-link fs-6" href="{% url 'logout' %}"><p class="text-danger">Đăng xuất</p></a></li>
+                                        <li><a class="nav-link fs-6" href="{% url 'logout' %}"><p class="text-danger"><strong>Đăng xuất</strong></p></a></li>
                                     </ul>
                                 </div>
                             </div>
