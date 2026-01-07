@@ -25,17 +25,29 @@ def login_view(request):
             request.session['user_id'] = str(user.id)
             request.session['username'] = user.username
             request.session['full_name'] = user.full_name
-            return render(request, 'base.html') # Đưa họ về trang chủ
+            request.session['email'] = user.email # THÊM DÒNG NÀY: Lấy email từ đối tượng user vừa tìm thấy trong MongoDB
+            return render(request, 'trangchu.html') # Đưa họ về trang chủ
         else:
             messages.error(request, "Tên đăng nhập hoặc mật khẩu không đúng!")
             
     return render(request, 'login.html')
 
 # 3. Trang cá nhân (Chỉ cho phép vào nếu đã "có dấu" Session)
+# home/views.py
+
 def profile_view(request):
+    # Kiểm tra nếu chưa đăng nhập thì đá về trang login
     if not request.session.get('user_id'):
         return redirect('login')
-    return render(request, 'profile.html')
+    
+    # Lấy thông tin từ session đã lưu lúc đăng nhập thành công
+    context = {
+        'full_name': request.session.get('full_name'),
+        'username': request.session.get('username'),
+        'email': request.session.get('email') # Lấy email từ session ra
+    }
+    
+    return render(request, 'profile.html', context)
 
 # 4. Đăng xuất (Xóa dấu Session)
 def logout_view(request):

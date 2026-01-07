@@ -5,15 +5,27 @@
 
 <!-- Nội dung block mà file con hiển thị -->
 {% block profile %}
-<div class="profile-card">
-    <h1 class="container-fluid text-left playfair-display">Thông tin tài khoản</h1>
+<div style="display: flex; justify-content: center; align-items: center; min-height: 80vh; background-color: none;">
+    <div style="background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; width: 500Spx;">
+        
+        <div style="width: 100px; height: 100px; background: #261d8a; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 40px; margin: 0 auto 20px;">
+            {{ username|slice:":2"|upper }}
+        </div>
 
-    <p><strong>Họ và tên:</strong> {{ request.session.full_name }}</p>
-    <p><strong>Tên đăng nhập:</strong> {{ request.session.username }}</p>
-    <p><strong>Email quản trị:</strong> {{ request.session.email }}</p>
-    <br>
+        <h2 style="color: #333; margin-bottom: 5px;">{{ full_name }}</h2>
+        <p style="color: #666; margin-bottom: 20px;">@{{ username }}</p>
+        
+        <hr style="border: 0; border-top: 1px solid #261d8a; margin-bottom: 20px;">
+
+        <div class="info-group">
+            <p><strong>Tên đăng nhập:</strong> {{ username }}</p>
+            <p><strong>Họ và tên:</strong> {{ full_name }}</p>
+            <p><strong>Email:</strong> {{ email }}</p> 
+        </div>
+
+        <a href="/trangchu/" style="display: block; margin-top: 30px; padding: 10px; background: #261d8a; color: white; text-decoration: none; border-radius: 10px; transition: 0.3s;">
+            Quay lại trang chủ
+        </a>
+    </div>
 </div>
-
-<h1></h1>
-<a href="/"> <p style="text-align: right;"> ← Quay lại trang chủ </p> </a>
 {% endblock profile %}
