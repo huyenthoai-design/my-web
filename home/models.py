@@ -1,7 +1,8 @@
 from django.db import models
 
 # Create your models here.
-from mongoengine import Document, StringField, EmailField
+from mongoengine import Document, StringField, EmailField, DateTimeField, IntField, ReferenceField
+import datetime
 
 class UserAccount(Document):
     meta = {'collection': 'users'} # Dữ liệu sẽ lưu vào bảng 'users'
@@ -13,3 +14,10 @@ class UserAccount(Document):
 
     def __str__(self):
         return self.username
+
+
+class UserHistory(Document):
+    user_id = StringField(required=True)
+    url = StringField()
+    access_time = DateTimeField(default=datetime.datetime.utcnow) # Lưu UTC, khi hiện sẽ +7
+    duration = IntField(default=0)  # Thời gian ở lại trang tính bằng giây

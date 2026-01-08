@@ -37,6 +37,48 @@
          <meta name="google-site-verification" content="JP05uWqBkp_J1n5tt9uXEu5ZuR1XWGYTofCwul1fGYI" />
     </head>
 
+
+
+
+    <!-- Thầm lặng tính giờ cho người dùng -->
+    <script>
+        let startTime = Date.now();
+        let currentUrl = window.location.href;
+
+        // Hàm gửi dữ liệu về Server
+        function sendDuration() {
+            let endTime = Date.now();
+            let durationInSeconds = (endTime - startTime) / 1000; // Đổi sang giây
+
+            // Chỉ lưu nếu người dùng ở lại trên 2 giây (tránh click nhầm)
+            if (durationInSeconds > 2) {
+                let formData = new FormData();
+                formData.append('duration', durationInSeconds);
+                formData.append('url', currentUrl);
+                formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+                // navigator.sendBeacon là cách tốt nhất để gửi dữ liệu khi đóng trang
+                navigator.sendBeacon('/update-duration/', formData);
+            }
+        }
+
+        // Sự kiện 1: Khi người dùng rời trang hoặc đóng tab
+        window.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'hidden') {
+                sendDuration();
+                // Reset lại thời gian nếu họ quay lại tab đó
+                startTime = Date.now();
+            }
+        });
+
+        // Sự kiện 2: Khi người dùng tắt hẳn trình duyệt (Dự phòng)
+        window.addEventListener('pagehide', sendDuration);
+    </script>
+
+
+
+
+
     <body>
         <!-- Bảng chọn -->
         <nav class="navbar navbar-expand-lg header-menu-dính">
@@ -230,6 +272,8 @@
             {% block login %}{% endblock login %}
             {% block profile %}{% endblock profile %}
             {% block edit_profile %}{% endblock edit_profile %}
+
+            {% block history %}{% endblock history %}
         </main>
 
         <!-- Footer      <footer class="container-fluid bg-danger text-light text-center p-1 mt-3">

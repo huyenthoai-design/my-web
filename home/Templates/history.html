@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+<!-- Xóa đi nội dung trong block của file gốc -->
+{% block base %}{% endblock base %}
+
+<!-- Nội dung block mà file con hiển thị -->
+{% block history %}
+
+<!-- Biểu đồ thời gian của người dùng từ js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container mt-4">
+    <div class="card p-4 shadow-sm mb-4">
+        <h4 class="text-center mb-4">Biểu đồ thời gian truy cập (7 ngày gần nhất)</h4>
+        <div style="height: 300px;">
+            <canvas id="usageChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<script>
+    const ctx = document.getElementById('usageChart').getContext('2d');
+    const usageChart = new Chart(ctx, {
+        type: 'bar', // Loại biểu đồ cột
+        data: {
+            labels: {{ chart_labels|safe }}, // Dữ liệu ngày từ Django
+            datasets: [{
+                label: 'Số phút trên web',
+                data: {{ chart_data|safe }}, // Dữ liệu phút từ Django
+                backgroundColor: 'rgba(38, 29, 138, 0.6)', // Màu xanh của logo bạn
+                borderColor: 'rgba(38, 29, 138, 1)',
+                borderWidth: 1,
+                borderRadius: 5
+            }]
+        },
+        options: {
+            responsive: True,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: { display: true, text: 'Phút' }
+                }
+            },
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+</script>
+<!-- Đến đây là hết biểu đồ kế đến là nội dung bên dưới -->
+
+<div class="container mt-5">
+    <h2>Lịch sử hoạt động</h2>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card bg-primary text-white p-3">
+                <h5>Tổng số lần truy cập: {{ total_visits }}</h5>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-success text-white p-3">
+                <h5>Tổng thời gian sử dụng: {{ total_time_str }}</h5>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Đường dẫn (URL)</th>
+                <th>Thời gian truy cập (GMT+7)</th>
+                <th>Thời lượng ở lại</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for h in histories %}
+            <tr>
+                <td><small>{{ h.url }}</small></td>
+                <td>{{ h.local_time|date:"d/m/Y H:i:s" }}</td>
+                <td>{{ h.duration }} giây</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock history %}

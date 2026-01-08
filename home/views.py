@@ -80,7 +80,123 @@ def edit_profile_view(request):
 
     return render(request, 'edit_profile.html', {'user': user})
 
+# 6. Thông tin lịch sử người dùng
+from .models import UserHistory
+from django.utils import timezone
+import datetime
 
+def history_view(request):
+    if not request.session.get('user_id'):
+        return redirect('login')
+    
+    uid = request.session['user_id']
+    # Lấy lịch sử, sắp xếp mới nhất lên đầu
+    histories = UserHistory.objects(user_id=uid).order_by('-access_time')
+    
+    total_visits = histories.count()
+    total_seconds = sum(h.duration for h in histories)
+    
+    # Tính Tổng giờ : phút
+    total_hours = total_seconds // 3600
+    total_minutes = (total_seconds % 3600) // 60
+    duration_str = f"{total_hours} giờ {total_minutes} phút"
+
+    # Dữ liệu cho biểu đồ (7 ngày gần nhất)
+    # Phần này chúng ta sẽ nhóm dữ liệu theo ngày để vẽ Chart
+    
+    context = {
+        'histories': histories,
+        'total_visits': total_visits,
+        'duration_str': duration_str,
+    }
+    return render(request, 'history.html', context)
+
+# 6.1 javascript tính giờ
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import UserHistory
+import datetime
+
+@csrf_exempt # Cho phép nhận dữ liệu từ Javascript
+def update_duration_view(request):
+    if request.method == "POST" and request.session.get('user_id'):
+        uid = request.session['user_id']
+        url = request.POST.get('url')
+        duration = int(float(request.POST.get('duration', 0)))
+
+        if duration > 0:
+            # Lưu bản ghi mới vào MongoDB
+            UserHistory(
+                user_id=uid,
+                url=url,
+                access_time=datetime.datetime.utcnow(),
+                duration=duration
+            ).save()
+            return JsonResponse({"status": "success"})
+    return JsonResponse({"status": "failed"}, status=400)
+
+# 6.2 Thể hiện giờ
+def history_view(request):
+    uid = request.session.get('user_id')
+    # Lấy dữ liệu từ MongoDB
+    histories = UserHistory.objects(user_id=uid).order_by('-access_time')
+
+    total_visits = histories.count()
+    total_sec = sum(h.duration for h in histories)
+    
+    # Tính giờ/phút
+    h = total_sec // 3600
+    m = (total_sec % 3600) // 60
+    total_time_str = f"{h} giờ {m} phút"
+
+    # Xử lý dữ liệu hiển thị danh sách (Cộng 7 giờ cho đúng giờ VN)
+    for item in histories:
+        item.local_time = item.access_time + datetime.timedelta(hours=7)
+
+    return render(request, 'history.html', {
+        'histories': histories,
+        'total_visits': total_visits,
+        'total_time_str': total_time_str
+    })
+
+# 6.3 Xử lí biểu đồ cho thời gian người dùng
+from django.db.models import Sum
+from collections import defaultdict
+
+def history_view(request):
+    uid = request.session.get('user_id')
+    histories = UserHistory.objects(user_id=uid).order_by('-access_time')
+    # --- BỔ SUNG ĐOẠN NÀY ĐỂ HẾT LỖI ---
+    total_visits = histories.count()
+    total_sec = sum(h.duration for h in histories)
+    # Tính giờ/phút
+    h = total_sec // 3600
+    m = (total_sec % 3600) // 60
+    total_time_str = f"{h} giờ {m} phút"
+    # ----------------------------------
+    # --- Xử lý dữ liệu cho Biểu đồ ---
+    daily_data = defaultdict(int)
+    for h_item in histories:
+        # Chuyển về giờ VN để nhóm cho đúng ngày
+        vn_time = h.access_time + datetime.timedelta(hours=7)
+        date_str = vn_time.strftime('%d/%m/%Y')
+        daily_data[date_str] += h.duration
+
+    # Lấy 7 ngày gần nhất (sắp xếp theo thứ tự thời gian tăng dần để vẽ biểu đồ)
+    sorted_days = sorted(daily_data.keys(), key=lambda x: datetime.datetime.strptime(x, '%d/%m/%Y'))[-7:]
+    
+    # Chuyển giây thành phút để biểu đồ dễ nhìn hơn
+    minutes_data = [round(daily_data[day] / 60, 1) for day in sorted_days]
+
+    # ... các phần tính toán cũ (total_visits, total_time_str) ...
+
+    return render(request, 'history.html', {
+        'histories': histories,
+        'total_visits': total_visits,
+        'total_time_str': total_time_str,
+        'chart_labels': sorted_days, # Các ngày (Trục X)
+        'chart_data': minutes_data,  # Số phút (Trục Y)
+    })
 
 # Create your views here.
 #def child1(request):
