@@ -40,6 +40,7 @@ urlpatterns = [
         path('lichsu/', include('home.urls')),
 
     path('minigames/', include('home.urls')),
+        path('game_so_sanh_so/', include('home.urls')),
 
     path('chuyenchuake/', include('home.urls')),
 

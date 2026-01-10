@@ -22,3 +22,10 @@ class UserHistory(Document):
     access_time = DateTimeField(default=datetime.datetime.utcnow)
     duration = IntField(default=0)
     is_visible = BooleanField(default=True) # Dòng này giúp chức năng xóa hoạt động
+    
+
+class UserGameScore(Document):
+    user_id = StringField(required=True)
+    total_score = IntField(default=0)
+    high_score = IntField(default=0)
+    level_reached = IntField(default=1)

@@ -77,28 +77,35 @@
     </div>
 
     <div class="card shadow-sm border-0" style="border-radius: 15px; overflow: hidden;">
-        <table class="table table-hover mb-0">
-            <thead style="background-color: #f8f9fa;">
-                <tr>
-                    <th style="padding: 15px;">Đường dẫn (URL)</th>
-                    <th style="padding: 15px;">Thời gian truy cập (GMT+7)</th>
-                    <th style="padding: 15px;">Thời lượng ở lại</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for h in histories %}
-                <tr>
-                    <td style="padding: 12px;"><small class="text-muted">{{ h.url }}</small></td>
-                    <td style="padding: 12px;">{{ h.vn_time |date:"d/m/Y H:i:s" }}</td>
-                    <td style="padding: 12px;"><span class="badge bg-light text-dark">{{ h.duration }} giây</span></td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="3" class="text-center py-4 text-muted">Chưa có lịch sử truy cập nào.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-hover mb-0" style="min-width: 600px;"> 
+                <thead style="background-color: #f8f9fa;">
+                    <tr>
+                        <th style="padding: 15px; white-space: nowrap;">Đường dẫn (URL)</th>
+                        <th style="padding: 15px; white-space: nowrap;">Thời gian truy cập (GMT+7)</th>
+                        <th style="padding: 15px; white-space: nowrap;">Thời lượng ở lại</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for h in histories %}
+                    <tr>
+                        <td style="padding: 12px; max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            <small class="text-muted" title="{{ h.url }}">{{ h.url }}</small>
+                        </td>
+                        <td style="padding: 12px; white-space: nowrap;">{{ h.vn_time|date:"d/m/Y H:i:s" }}</td>
+                        <td style="padding: 12px; white-space: nowrap;">
+                            <span class="badge bg-light text-dark">{{ h.duration }} giây</span>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3" class="text-center py-4 text-muted">Chưa có lịch sử truy cập nào.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
+
 </div>
 {% endblock history %}

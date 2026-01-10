@@ -17,7 +17,9 @@ urlpatterns = [
         path('sinhhoc/', views.sinhhoc, name='sinhhoc'),
         path('lichsu/', views.lichsu, name='lichsu'),
 
-    path('minigames/', views.minigames, name='minigames'),
+    path('minigames/', views.minigames_view, name='minigames'),
+        path('game_so_sanh_so/', views.game_so_sanh_so, name='game_so_sanh_so'),
+        path('save-game-score/', views.save_game_score, name='save_game_score'),
 
     path('chuyenchuake/', views.chuyenchuake, name='chuyenchuake'),
 

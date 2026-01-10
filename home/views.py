@@ -166,6 +166,52 @@ def update_duration_view(request):
             
     return JsonResponse({"status": "failed"}, status=400)
 
+# 7. lưu dữ liệu khi chơi game so sánh số
+from django.http import JsonResponse
+from .models import UserGameScore
+
+# --- HÀM 1: ---
+def save_game_score(request):
+    if request.method == "POST" and request.session.get('user_id'):
+        uid = request.session['user_id']
+        try:
+            points = int(request.POST.get('points', 0))
+            
+            # Tìm bản ghi của User
+            score_record = UserGameScore.objects(user_id=uid).first()
+            if not score_record:
+                score_record = UserGameScore(user_id=uid, total_score=0)
+            
+            # Cộng dồn điểm
+            score_record.total_score += points
+            score_record.save() # Lệnh quan trọng nhất để lưu vào Database
+            
+            return JsonResponse({
+                "status": "success", 
+                "total_score": score_record.total_score
+            })
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": str(e)}, status=500)
+            
+    return JsonResponse({"status": "failed"}, status=400)
+
+# --- HÀM 2: ---
+@csrf_exempt # Nếu bạn dùng decorator này thì không cần header CSRF cho hàm này
+def update_duration_view(request):
+    if request.method == "POST":
+        # Sử dụng .get() và cung cấp giá trị mặc định để tránh lỗi 400
+        url = request.POST.get('url', 'unknown')
+        duration_raw = request.POST.get('duration', 0)
+        
+        try:
+            duration = int(float(duration_raw))
+        except (ValueError, TypeError):
+            duration = 0
+            
+        # ... logic lưu vào MongoDB giữ nguyên ...
+        return JsonResponse({"status": "success"})
+    return JsonResponse({"status": "failed"}, status=400)
+
 
 # Create your views here.
 #def child1(request):
@@ -197,8 +243,22 @@ def sinhhoc(request):
 def lichsu(request):
     return render(request, 'lichsu.html')
 
-def minigames(request):
-    return render(request, 'minigames.html')
+def minigames_view(request):
+    total_pts = 0 
+    # Kiểm tra xem người dùng đã đăng nhập chưa thông qua session
+    if request.session.get('user_id'):
+        uid = request.session['user_id']
+        # Tìm bản ghi điểm trong bảng user_game_score
+        record = UserGameScore.objects(user_id=uid).first()
+        if record:
+            # Lấy giá trị từ cột total_score trong database
+            total_pts = record.total_score
+ 
+    # Gửi biến 'user_score' ra file HTML để hiển thị
+    return render(request, 'minigames.html', {'total_score': total_pts})
+
+def game_so_sanh_so(request):
+    return render(request, 'game_so_sanh_so.html')
 
 def chuyenchuake(request):
     return render(request, 'chuyenchuake.html')
