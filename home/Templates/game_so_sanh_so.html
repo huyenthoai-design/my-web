@@ -1,4 +1,30 @@
 {% extends "base.html" %}
+{% block overlay %}
+<div id="start-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; z-index: 9999; color: white; text-align: center; font-family: Arial, sans-serif;">
+    
+    <div id="instruction-box">
+        <h1 class="container-fluid text-center" style="color: #ffcc00; margin-bottom: 20px;">HƯỚNG DẪN CHƠI</h1>
+        
+        <p style="font-size: 1.2rem; color: rgb(169, 235, 225)">Trong vòng <b>1.5 giây</b>, hãy chọn thẻ có số <b>LỚN HƠN</b>.</p>
+        
+        <div style="margin: 20px 0; background: #000000; padding: 15px; border-radius: 8px;">
+            <p style="color: rgb(255, 255, 255)"><b>Máy tính:</b> Phím <b>A</b> (Trái) | <b>D</b> (Phải) hoặc phím mũi tên</p>
+            <p style="color: rgb(255, 255, 255)"><b>Điện thoại:</b> Chạm vào nửa màn hình tương ứng có số lớn hơn</p>
+        </div>
+        
+        <button onclick="exitToMenu()" style="padding: 15px 40px; font-size: 1.5rem; background: #dc3545; color: white; border: none; border-radius: 10px; cursor: pointer; transition: 0.3s;">
+            TRỞ LẠI
+        </button>
+
+        <button onclick="startCountdown()" style="padding: 15px 50px; font-size: 1.5rem; background: #28a745; color: white; border: none; border-radius: 10px; cursor: pointer; transition: 0.3s;">
+            SẴN SÀNG!
+        </button>
+
+    </div>
+
+    <div id="countdown-number" style="display: none; font-size: 180px; font-weight: bold; color: #ffcc00;">3</div>
+</div>
+{% endblock overlay %}
 
 <!-- Xóa đi nội dung trong block của file gốc -->
 {% block base %}{% endblock base %}
@@ -7,14 +33,20 @@
 {% block game_so_sanh_so %}
     {% csrf_token %}
     {% load static %}
-    <script src="/static/js/game-so-sánh-số.js" > </script>
+    <script src="/static/js/game-so-sánh-số.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="/static/js/game-so-sánh-số.js"></script>
+    <script>
+        // Django sẽ tự điền true nếu không có session user_id
+        const IS_GUEST = {% if request.session.user_id %}false{% else %}true{% endif %};
+    </script>
 
     <div class="container text-center mt-5">
         <div id="game-menu">
             <h2>Trò chơi Toán học Phản xạ</h2>
-            <p>Tổng điểm của bạn: <strong id="display-total-score">{{ total_score }}</strong></p>
-            <button class="btn btn-primary btn-lg m-2" onclick="startGame('compare')">So sánh số (Vòng 1)</button>
-            <p class="text-muted small">Máy tính: Dùng phím A/D hoặc ←/→ | Điện thoại: Chạm vào nửa màn hình</p>
+            <p>Tổng điểm của bạn: <span id="total-points-display" style="font-weight: bold; color: blue;"> {{ user_score }}</span></p>
+            <hr>
+            <button class="btn btn-primary btn-lg m-2" onclick="showInstructions()">So sánh số (Vòng 1)</button>
         </div>
 
         <div id="game-area" style="display: none; position: relative; height: 80vh;">
@@ -35,15 +67,48 @@
     </div>
 
     <style>
+        #countdown-number {
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            user-select: none; /* Không cho phép bôi đen số khi đang đếm */
+        }
+        #instruction-box button:hover {
+            background: #214a88 !important;
+            transform: scale(1.1);
+        }
+        #instruction-box button:active {
+            transform: scale(0.95);
+        }
         .game-side { cursor: pointer; transition: background 0.1s; }
-        .game-side:active { background: #f0f0f0; }
+        .game-side:active { background: #ffffff; }
         .number-card {
             font-size: 5rem;
             font-weight: bold;
             padding: 40px;
-            border: 4px solid #261d8a;
+            border: 3px solid #261d8a;
             border-radius: 20px;
             min-width: 150px;
         }
+        /* Hiệu ứng rung màn hình */
+        .shake {
+            animation: shake 0.3s;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-10px); }
+            100% { transform: translateX(0); }
+        }
     </style>
+
+
+<audio id="sound-correct" src="/static/sounds/correct.mp3" preload="auto"></audio>
+<audio id="sound-wrong" src="/static/sounds/wrong.mp3" preload="auto"></audio>
+<audio id="sound-finish" src="/static/sounds/finish.mp3" preload="auto"></audio>
+<audio id="sound-beep" src="/static/sounds/beep.mp3" preload="auto"></audio>
+
 {% endblock game_so_sanh_so %}
+
+<!-- bỏ footer -->
+{% block footer %}{% endblock footer %}

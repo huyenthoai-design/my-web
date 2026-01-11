@@ -168,31 +168,25 @@ def update_duration_view(request):
 
 # 7. lưu dữ liệu khi chơi game so sánh số
 from django.http import JsonResponse
-from .models import UserGameScore
+from .models import UserAccount
 
 # --- HÀM 1: ---
 def save_game_score(request):
     if request.method == "POST" and request.session.get('user_id'):
         uid = request.session['user_id']
-        try:
-            points = int(request.POST.get('points', 0))
-            
-            # Tìm bản ghi của User
-            score_record = UserGameScore.objects(user_id=uid).first()
-            if not score_record:
-                score_record = UserGameScore(user_id=uid, total_score=0)
-            
-            # Cộng dồn điểm
-            score_record.total_score += points
-            score_record.save() # Lệnh quan trọng nhất để lưu vào Database
+        new_points = int(request.POST.get('points', 0))
+
+        # Tìm người dùng trực tiếp trong bảng User
+        user = UserAccount.objects(id=uid).first()
+        if user:
+            # Cộng dồn điểm vào trường total_score của User
+            user.total_score += new_points
+            user.save() # Lưu lại vào MongoDB
             
             return JsonResponse({
                 "status": "success", 
-                "total_score": score_record.total_score
+                "total_score": user.total_score
             })
-        except Exception as e:
-            return JsonResponse({"status": "error", "message": str(e)}, status=500)
-            
     return JsonResponse({"status": "failed"}, status=400)
 
 # --- HÀM 2: ---
@@ -244,21 +238,20 @@ def lichsu(request):
     return render(request, 'lichsu.html')
 
 def minigames_view(request):
-    total_pts = 0 
-    # Kiểm tra xem người dùng đã đăng nhập chưa thông qua session
-    if request.session.get('user_id'):
-        uid = request.session['user_id']
-        # Tìm bản ghi điểm trong bảng user_game_score
-        record = UserGameScore.objects(user_id=uid).first()
-        if record:
-            # Lấy giá trị từ cột total_score trong database
-            total_pts = record.total_score
- 
-    # Gửi biến 'user_score' ra file HTML để hiển thị
-    return render(request, 'minigames.html', {'total_score': total_pts})
+    return render(request, 'minigames.html')
 
 def game_so_sanh_so(request):
-    return render(request, 'game_so_sanh_so.html')
+    user_points = 0
+    uid = request.session.get('user_id')
+    
+    if uid:
+        user = UserAccount.objects(id=uid).first()
+        if user:
+            # Lấy tổng điểm hiện có để hiển thị khi bắt đầu vào game
+            user_points = getattr(user, 'total_score', 0)
+            
+    # Gửi biến sang file HTML
+    return render(request, 'game_so_sanh_so.html', {'user_score': user_points})
 
 def chuyenchuake(request):
     return render(request, 'chuyenchuake.html')

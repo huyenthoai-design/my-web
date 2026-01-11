@@ -6,6 +6,23 @@
 <!-- Nội dung block mà file con hiển thị -->
 {% block minigames %}
 <h1 class="container-fluid text-left playfair-display">MINIGAMES</h1>
-<a href="{% url 'game_so_sanh_so' %}"> <p>Game so sánh số</p> </a>
+
+<a href="{% url 'game_so_sanh_so' %}">
+    <div class="game-link" :hover style="background-color: rgb(24, 145, 20); color: white; font-size: 18px; padding: 10px 20px; border-radius: 8px; display: inline-block; cursor: pointer; font-weight: bold;">
+        Toán học Phản xạ
+    </div>
+</a>
+
+
+<style>
+    .game-link {
+        transition: transform 0.2s, background-color 0.2s;
+    }
+    .game-link:hover {
+        transform: scale(1.05); /* Phóng to nhẹ khi rê chuột vào */
+        background-color: #0099ff; /* Đổi màu xanh đậm hơn */
+        color: white;
+    }
+</style>
 
 {% endblock minigames%}
