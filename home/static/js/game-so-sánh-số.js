@@ -1,6 +1,6 @@
 let score = 0;
 let questionIdx = 1;
-let timeLeft = 1500;
+let timeLeft = 1000;
 let timerInterval;
 let currentLeft, currentRight;
 let isCounting = false;
@@ -85,7 +85,7 @@ function nextQuestion() {
 // 5. BỘ ĐẾM GIỜ CHO MỖI CÂU
 function startTimer() {
     clearInterval(timerInterval);
-    timeLeft = 1500; 
+    timeLeft = 1000; 
     
     timerInterval = setInterval(() => {
         timeLeft -= 10;
@@ -106,11 +106,11 @@ function handleChoice(choice) {
     if (choice === 'left' && currentLeft > currentRight) correct = true;
     if (choice === 'right' && currentRight > currentLeft) correct = true;
 
-    if (correct) {
+    if (correct) { // lưu điểm
         document.getElementById('sound-correct').play();
-        score += 5;
+        score += 3;
         document.getElementById('current-pts').innerText = score;
-        if (score === 50) shootConfetti(); 
+        if (score === 30) shootConfetti(); 
     } else {
         document.getElementById('sound-wrong').play();
         const gameArea = document.getElementById('game-area');

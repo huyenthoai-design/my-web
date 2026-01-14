@@ -26,6 +26,7 @@ def login_view(request):
             request.session['username'] = user.username
             request.session['full_name'] = user.full_name
             request.session['email'] = user.email # THÊM DÒNG NÀY: Lấy email từ đối tượng user vừa tìm thấy trong MongoDB
+            request.session['total_score'] = user.total_score
             return render(request, 'trangchu.html') # Đưa họ về trang chủ
         else:
             messages.error(request, "Tên đăng nhập hoặc mật khẩu không đúng!")
@@ -44,7 +45,8 @@ def profile_view(request):
     context = {
         'full_name': request.session.get('full_name'),
         'username': request.session.get('username'),
-        'email': request.session.get('email') # Lấy email từ session ra
+        'email': request.session.get('email'), # Lấy email từ session ra
+        'total_score': request.session.get('total_score'),
     }
     
     return render(request, 'profile.html', context)
